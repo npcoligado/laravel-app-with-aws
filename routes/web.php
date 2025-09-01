@@ -27,3 +27,7 @@ Route::get('/guestbook-create', [GuestbookController::class, 'showForm'])->name(
 Route::get('/guestbook-view', [GuestbookController::class, 'viewGuestbook'])->name('guestbook.view');
 Route::post('/guestbook', [GuestbookController::class, 'submitForm'])->name('guestbook.submit');
 Route::get('/guestbook-result', [GuestbookController::class, 'viewGuestbookResult'])->name('guestbook.result');
+
+Route::get('/healthz', function () {
+    return view('healthcheck');
+})->name('healthz');
