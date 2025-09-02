@@ -25,7 +25,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy PHP configuration
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
+# Copy PHP-FPM configuration
+COPY docker/php-fpm.d/php-fpm.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+
 # Copy Nginx configuration
+RUN rm -rf /usr/share/nginx/html/*
 COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy Supervisor configuration
@@ -41,8 +45,8 @@ COPY . .
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
 # Set permissions
-RUN chown -R www-data:www-data /var/www /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R 775 /var/www /var/www/storage /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/public /var/www/storage /var/www/bootstrap/cache \
+    && chmod -R 775 /var/www/public /var/www/storage /var/www/bootstrap/cache
 
 # Expose port for Nginx
 EXPOSE 80

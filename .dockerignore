@@ -1,0 +1,15 @@
+# Ignore tests and CI
+tests
+infra
+phpunit.xml
+
+# Ignore local configs and git
+.editorconfig
+.gitattributes
+.gitignore
+.github
+.git
+README.md
+
+# Env examples
+.env.example
